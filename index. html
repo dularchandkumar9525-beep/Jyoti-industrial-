@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jyoti Industrial Solution (JIS) | Bhiwadi</title>
+  
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0b2545',
+              dark: '#07162c',
+              blue: '#134074',
+              accent: '#f59e0b',
+              light: '#eef4f8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-sans antialiased pb-16 md:pb-0">
+
+  <!-- ================= TOP MAIN NAVBAR ================= -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo / Brand Identity -->
+        <a href="#home" class="flex items-center gap-3 group">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-navy to-brand-blue text-brand-accent flex items-center justify-center font-black text-2xl tracking-tighter shadow-md group-hover:scale-105 transition-transform">
+            JIS
+          </div>
+          <div>
+            <div class="font-extrabold text-xl md:text-2xl text-brand-navy leading-none tracking-tight">
+              Jyoti Industrial Solution
+            </div>
+            <p class="text-xs text-slate-500 font-medium tracking-wide mt-1">
+              Manufacturer & Industrial Services • Bhiwadi
+            </p>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-1 font-semibold text-sm">
+          <a href="#home" data-nav="home" class="nav-item px-4 py-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-slate-100 transition-colors">Home</a>
+          <a href="#about" data-nav="about" class="nav-item px-4 py-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-slate-100 transition-colors">About Us</a>
+          <a href="#products" data-nav="products" class="nav-item px-4 py-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-slate-100 transition-colors">Products & Services</a>
+          <a href="#machinery" data-nav="machinery" class="nav-item px-4 py-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-slate-100 transition-colors">Used Machinery</a>
+          <a href="#contact" data-nav="contact" class="nav-item px-4 py-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-slate-100 transition-colors">Contact & GST</a>
+        </nav>
+
+        <!-- Right Action Button -->
+        <div class="hidden lg:flex items-center gap-3">
+          <button onclick="openRfqModal('General Industrial Inquiry')" class="bg-brand-navy hover:bg-brand-blue text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-md transition-all flex items-center gap-2">
+            <i data-lucide="file-text" class="w-4 h-4 text-brand-accent"></i>
+            Request Quote
+          </button>
+        </div>
+
+        <!-- Mobile Menu Hamburger -->
+        <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobileDrawer" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-2 shadow-lg">
+      <a href="#home" class="mobile-nav-item block px-3 py-2 rounded-lg text-slate-700 font-medium hover:bg-slate-100">Home</a>
+      <a href="#about" class="mobile-nav-item block px-3 py-2 rounded-lg text-slate-700 font-medium hover:bg-slate-100">About Us</a>
+      <a href="#products" class="mobile-nav-item block px-3 py-2 rounded-lg text-slate-700 font-medium hover:bg-slate-100">Products & Services</a>
+      <a href="#machinery" class="mobile-nav-item block px-3 py-2 rounded-lg text-slate-700 font-medium hover:bg-slate-100">Injection Moulding Machines</a>
+      <a href="#contact" class="mobile-nav-item block px-3 py-2 rounded-lg text-slate-700 font-medium hover:bg-slate-100">Contact & GST Details</a>
+      <button onclick="openRfqModal('General Inquiry'); closeDrawer();" class="w-full mt-2 bg-brand-navy text-white text-center py-2.5 rounded-lg font-semibold flex items-center justify-center gap-2">
+        <i data-lucide="file-text" class="w-4 h-4 text-brand-accent"></i> Request Quick Quotation
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= BREADCRUMB BAR ================= -->
+  <section class="bg-slate-100 border-b border-slate-200 py-2.5 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <a href="#home" class="hover:text-brand-blue">JIS Portal</a>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        <span id="currentBreadcrumb" class="font-semibold text-slate-800 capitalize">Home</span>
+      </div>
+      <div class="hidden sm:flex items-center gap-4 text-slate-600">
+        <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-blue"></i> RIICO Phase-II, Bhiwadi</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i> GST Registered</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MAIN CONTENT PAGES ================= -->
+  <main class="flex-grow">
+
+    <!-- PAGE 1: HOME -->
+    <div id="page-home" class="page-section active">
+      <!-- Hero Banner -->
+      <section class="bg-gradient-to-br from-brand-dark via-brand-navy to-brand-blue text-white py-16 lg:py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="max-w-3xl">
+            <span class="inline-flex items-center gap-2 bg-brand-accent/20 text-brand-accent border border-brand-accent/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4">
+              Precision Engineering & Industrial Automation
+            </span>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-6">
+              Complete Industrial Automation, Tooling & Machinery Solutions.
+            </h1>
+            <p class="text-base sm:text-lg text-slate-300 leading-relaxed mb-8">
+              From precision Jigs, Fixtures & Poka Yoke systems to PLC/HMI automation, pneumatics, hydraulics, and certified Injection Moulding Machine services based out of RIICO Industrial Area, Bhiwadi.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#products" class="bg-brand-accent hover:bg-amber-500 text-brand-dark font-bold px-6 py-3.5 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
+                Explore Products & Services <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+              <button onclick="openRfqModal('Urgent RFQ from Homepage')" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-6 py-3.5 rounded-lg transition-all flex items-center gap-2">
+                <i data-lucide="message-square" class="w-4 h-4"></i> Get Instant Quote
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Capabilities Overview -->
+      <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy">Core Engineering Divisions</h2>
+          <p class="text-sm sm:text-base text-slate-600 mt-2">Specialized industrial solutions designed for manufacturing reliability.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 bg-amber-100 text-brand-navy rounded-xl flex items-center justify-center mb-5">
+              <i data-lucide="wrench" class="w-6 h-6 text-brand-navy"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">Jigs, Fixture & Poka Yoke</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4">High accuracy tooling, error-proofing (Poka Yoke) jigs, testing fixtures, die, and mould components.</p>
+            <a href="#products" class="text-xs font-bold text-brand-blue flex items-center gap-1 hover:underline">View Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 bg-blue-100 text-brand-blue rounded-xl flex items-center justify-center mb-5">
+              <i data-lucide="cpu" class="w-6 h-6 text-brand-blue"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">Electrical & Automation Goods</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4">Safety sensors, PLCs, HMIs, Servo drives, proximity sensors, electrical control panels & SPM wiring.</p>
+            <a href="#products" class="text-xs font-bold text-brand-blue flex items-center gap-1 hover:underline">View Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center mb-5">
+              <i data-lucide="gauge" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">Pneumatics & Hydraulics</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4">Cylinders, solenoid valves, pneumatic lines, high-pressure fittings, and hydraulic systems.</p>
+            <a href="#products" class="text-xs font-bold text-brand-blue flex items-center gap-1 hover:underline">View Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center mb-5">
+              <i data-lucide="flame" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">Heater & Thermocouples</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4">Mica band, ceramic, cartridge heaters, and high-precision temperature sensors for industrial machinery.</p>
+            <a href="#products" class="text-xs font-bold text-brand-blue flex items-center gap-1 hover:underline">View Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 bg-rose-100 text-rose-700 rounded-xl flex items-center justify-center mb-5">
+              <i data-lucide="settings-2" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">SPM & Assembly Conveyors</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4">Custom Special Purpose Machines (S.P.M.), automated assembly lines, conveyor belts, and control panels.</p>
+            <a href="#products" class="text-xs font-bold text-brand-blue flex items-center gap-1 hover:underline">View Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center mb-5">
+              <i data-lucide="factory" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">Injection Moulding Machines</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4">Sale, purchase, full overhauling, retrofit PLC controls, and on-site servicing of used moulding machines.</p>
+            <a href="#machinery" class="text-xs font-bold text-brand-blue flex items-center gap-1 hover:underline">View Machinery Division <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bhiwadi Industrial Hub Banner -->
+      <section class="bg-slate-100 border-y border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 class="text-xl font-bold text-brand-navy">Serving Bhiwadi, Khairthal-Tijara & NCR Industrial Hubs</h3>
+            <p class="text-sm text-slate-600 mt-1">Direct support from Plot No. J-751, RIICO Industrial Area Phase-II.</p>
+          </div>
+          <a href="#contact" class="bg-brand-navy text-white px-5 py-3 rounded-lg text-sm font-semibold hover:bg-brand-blue transition-colors">
+            Get Factory Directions
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- PAGE 2: ABOUT US -->
+    <div id="page-about" class="page-section">
+      <div class="bg-brand-navy text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-extrabold">About Jyoti Industrial Solution</h1>
+          <p class="text-slate-300 mt-2 text-sm sm:text-base">Your engineering partner for manufacturing tools, automation components, and industrial machinery maintenance.</p>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">Manufacturer & Industrial Service Specialists</h2>
+            <p class="text-slate-600 leading-relaxed mb-4">
+              <strong>Jyoti Industrial Solution (JIS)</strong> is an industrial engineering and automation firm headquartered in the RIICO Industrial Area, Bhiwadi. We bridge the gap between heavy machinery requirements and electronic control systems.
+            </p>
+            <p class="text-slate-600 leading-relaxed mb-4">
+              Our engineering team excels in fabrication of customized <strong>Jigs, Fixtures, Poka Yoke systems, SPM test benches</strong>, and industrial automation assemblies that enhance factory floor productivity.
+            </p>
+            <div class="grid grid-cols-2 gap-4 mt-6">
+              <div class="border border-slate-200 p-4 rounded-xl bg-white shadow-sm">
+                <div class="text-2xl font-black text-brand-blue">100%</div>
+                <div class="text-xs text-slate-500 font-medium mt-1">Custom Engineering & Poka Yoke Accuracy</div>
+              </div>
+              <div class="border border-slate-200 p-4 rounded-xl bg-white shadow-sm">
+                <div class="text-2xl font-black text-brand-accent">24/7</div>
+                <div class="text-xs text-slate-500 font-medium mt-1">Breakdown & Service Support</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+            <h3 class="text-lg font-bold text-brand-navy border-b border-slate-100 pb-3">Facility & Compliance</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start gap-3">
+                <i data-lucide="map-pin" class="w-5 h-5 text-brand-blue shrink-0 mt-0.5"></i>
+                <div>
+                  <span class="font-bold text-slate-800">Operational Base:</span>
+                  <p class="text-slate-600">Plot No. J-751, RIICO Industrial Area, Phase-II, Bhiwadi, Khairthal-Tijara (Raj.) 301019</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i data-lucide="file-check" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
+                <div>
+                  <span class="font-bold text-slate-800">GST Registration:</span>
+                  <p class="text-slate-600 font-mono">08CBWPG8529P1ZA (Verified)</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i data-lucide="mail" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+                <div>
+                  <span class="font-bold text-slate-800">Corporate Email:</span>
+                  <p class="text-slate-600">jyotiindustrialsolution@gmail.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: PRODUCTS & SERVICES -->
+    <div id="page-products" class="page-section">
+      <div class="bg-brand-navy text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-extrabold">Products & Services Catalog</h1>
+          <p class="text-slate-300 mt-2 text-sm sm:text-base">Comprehensive industrial component supply, custom fabrication, and tooling solutions.</p>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap gap-2 mb-8 border-b border-slate-200 pb-4">
+          <button onclick="filterCatalog('all')" class="cat-btn active bg-brand-navy text-white px-4 py-2 rounded-lg text-xs font-bold transition-all">All Items</button>
+          <button onclick="filterCatalog('tooling')" class="cat-btn bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-lg text-xs font-bold transition-all">Tooling & Jigs</button>
+          <button onclick="filterCatalog('automation')" class="cat-btn bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-lg text-xs font-bold transition-all">Electrical & Automation</button>
+          <button onclick="filterCatalog('fluid')" class="cat-btn bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-lg text-xs font-bold transition-all">Pneumatics & Hydraulics</button>
+          <button onclick="filterCatalog('thermal')" class="cat-btn bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-lg text-xs font-bold transition-all">Heaters & Sensors</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="catalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Item 1 -->
+          <div class="catalog-card tooling bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-blue-100 text-blue-800">Tooling</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2">Jigs, Fixtures & Poka Yoke</h3>
+              <p class="text-sm text-slate-600 mt-2">Custom-built inspection fixtures, assembly jigs, and error-proofing (Poka Yoke) devices built to tight tolerances.</p>
+              <ul class="text-xs text-slate-500 mt-3 space-y-1">
+                <li>• Assembly checking fixtures</li>
+                <li>• Zero-defect Poka Yoke systems</li>
+                <li>• Clamping and machining jigs</li>
+              </ul>
+            </div>
+            <button onclick="openRfqModal('Jigs, Fixture & Poka Yoke')" class="mt-5 w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 text-xs font-bold py-2.5 rounded-lg transition-colors">
+              Request Price & Specs
+            </button>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="catalog-card tooling bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-blue-100 text-blue-800">Tooling</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2">Die, Mould & Precision Parts</h3>
+              <p class="text-sm text-slate-600 mt-2">High-strength dies, mould components, cutting tools, and replacement wear plates for press and moulding machines.</p>
+              <ul class="text-xs text-slate-500 mt-3 space-y-1">
+                <li>• Mould core & cavity repair</li>
+                <li>• Precision machining</li>
+                <li>• Hardened tooling accessories</li>
+              </ul>
+            </div>
+            <button onclick="openRfqModal('Die, Mould And Tooling')" class="mt-5 w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 text-xs font-bold py-2.5 rounded-lg transition-colors">
+              Request Price & Specs
+            </button>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="catalog-card automation bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Automation</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2">PLCs, HMIs & Servo Drives</h3>
+              <p class="text-sm text-slate-600 mt-2">Supply, integration, programming, and troubleshooting of programmable logic controllers, touch panels, and servo systems.</p>
+              <ul class="text-xs text-slate-500 mt-3 space-y-1">
+                <li>• Leading brand PLC/HMI modules</li>
+                <li>• High-accuracy servo motor drives</li>
+                <li>• Parameter tuning & backup</li>
+              </ul>
+            </div>
+            <button onclick="openRfqModal('PLC, HMI, Servo Drive Supply & Programming')" class="mt-5 w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 text-xs font-bold py-2.5 rounded-lg transition-colors">
+              Request Price & Specs
+            </button>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="catalog-card automation bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Automation</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2">Safety Sensors & Proximity Goods</h3>
+              <p class="text-sm text-slate-600 mt-2">Industrial safety light curtains, inductive proximity sensors, photo sensors, and area safety scanners.</p>
+              <ul class="text-xs text-slate-500 mt-3 space-y-1">
+                <li>• Safety light curtains for presses</li>
+                <li>• PNP/NPN inductive proximity sensors</li>
+                <li>• Optical & fiber optic sensors</li>
+              </ul>
+            </div>
+            <button onclick="openRfqModal('Safety Sensors & Industrial Sensors')" class="mt-5 w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 text-xs font-bold py-2.5 rounded-lg transition-colors">
+              Request Price & Specs
+            </button>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="catalog-card fluid bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-cyan-100 text-cyan-800">Fluid Power</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2">Pneumatics & Cylinders</h3>
+              <p class="text-sm text-slate-600 mt-2">Complete pneumatic line supplies: ISO standard pneumatic cylinders, magnetic sensors, solenoid valves, and tubes.</p>
+              <ul class="text-xs text-slate-500 mt-3 space-y-1">
+                <li>• Single & double acting cylinders</li>
+                <li>• 5/2 & 3/2 Solenoid valve manifolds</li>
+                <li>• PU tubes, quick connectors & FRL units</li>
+              </ul>
+            </div>
+            <button onclick="openRfqModal('Pneumatics & Cylinder Valves')" class="mt-5 w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 text-xs font-bold py-2.5 rounded-lg transition-colors">
+              Request Price & Specs
+            </button>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="catalog-card fluid bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-cyan-100 text-cyan-800">Fluid Power</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2">Hydraulics Equipments & Piping</h3>
+              <p class="text-sm text-slate-600 mt-2">Industrial hydraulic cylinders, power packs, proportional valves, high-pressure pipes, and seals.</p>
+              <ul class="text-xs text-slate-500 mt-3 space-y-1">
+                <li>• Hydraulic cylinder overhauling</li>
+                <li>• Directional control valves & seals</li>
+                <li>• High pressure hose crimping</li>
+              </ul>
+            </div>
+            <button onclick="openRfqModal('Hydraulics Equipment & Pipes')" class="mt-5 w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 text-xs font-bold py-2.5 rounded-lg transition-colors">
+              Request Price & Specs
+            </button>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="catalog-card thermal bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-amber-100 text-amber-800">Thermal</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2">Heaters (Band / Ceramic / Cartridge)</h3>
+              <p class="text-sm text-slate-600 mt-2">Industrial grade heating solutions specially designed for injection moulding barrels, extruders, and dies.</p>
+              <ul class="text-xs text-slate-500 mt-3 space-y-1">
+                <li>• Mica & Ceramic band heaters</li>
+                <li>• Cartridge heaters with lead protection</li>
+                <li>• Energy efficient insulating jackets</li>
+              </ul>
+            </div>
+            <button onclick="openRfqModal('Industrial Heaters')" class="mt-5 w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 text-xs font-bold py-2.5 rounded-lg transition-colors">
+              Request Price & Specs
+            </button>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="catalog-card thermal bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-amber-100 text-amber-800">Thermal</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2">Thermocouples & Temperature Sensors</h3>
+              <p class="text-sm text-slate-600 mt-2">J-type, K-type thermocouples and RTD PT100 sensors for accurate thermal monitoring in high heat environments.</p>
+              <ul class="text-xs text-slate-500 mt-3 space-y-1">
+                <li>• Mineral insulated thermocouples</li>
+                <li>• Bayonet spring type sensors</li>
+                <li>• Digital PID temperature controllers</li>
+              </ul>
+            </div>
+            <button onclick="openRfqModal('Thermocouple & Temperature Sensors')" class="mt-5 w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 text-xs font-bold py-2.5 rounded-lg transition-colors">
+              Request Price & Specs
+            </button>
+          </div>
+
+          <!-- Item 9 -->
+          <div class="catalog-card automation bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-purple-100 text-purple-800">Machines</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-2">S.P.M. Testing Equipments & Conveyor</h3>
+              <p class="text-sm text-slate-600 mt-2">Turnkey Special Purpose Machines (SPM), assembly conveyor lines, endurance testing rigs, and electrical control panels.</p>
+              <ul class="text-xs text-slate-500 mt-3 space-y-1">
+                <li>• Automated assembly conveyor line</li>
+                <li>• Electrical control panel design</li>
+                <li>• Functional testing stations</li>
+              </ul>
+            </div>
+            <button onclick="openRfqModal('SPM Testing Equipments & Conveyors')" class="mt-5 w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 text-xs font-bold py-2.5 rounded-lg transition-colors">
+              Request Price & Specs
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: INJECTION MOULDING DIVISION -->
+    <div id="page-machinery" class="page-section">
+      <div class="bg-brand-navy text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <span class="text-brand-accent text-xs font-extrabold uppercase tracking-widest">Specialized Division</span>
+          <h1 class="text-3xl font-extrabold mt-1">Injection Moulding Machines</h1>
+          <p class="text-slate-300 mt-2 text-sm sm:text-base">Service, Sale & Purchase of Used Injection Moulding Machines in Rajasthan & NCR.</p>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- Column 1 & 2: Services -->
+          <div class="lg:col-span-2 space-y-8">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+              <h2 class="text-xl font-bold text-slate-900 mb-3">Complete Machinery Lifecycle Support</h2>
+              <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                Jyoti Industrial Solution provides end-to-end solutions for plastic moulding units. Whether you want to purchase quality pre-owned machines, liquidate existing moulding assets, or need complete overhaul and PLC refurbishment, our team delivers tested reliability.
+              </p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="border border-slate-100 bg-slate-50 p-4 rounded-xl">
+                  <div class="flex items-center gap-2 font-bold text-slate-800 text-sm mb-1">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Sale of Used Machines
+                  </div>
+                  <p class="text-xs text-slate-600">Mechanically verified and electrically tested injection moulding machines (50T to 500T+).</p>
+                </div>
+
+                <div class="border border-slate-100 bg-slate-50 p-4 rounded-xl">
+                  <div class="flex items-center gap-2 font-bold text-slate-800 text-sm mb-1">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-blue"></i> Purchase / Buyback
+                  </div>
+                  <p class="text-xs text-slate-600">Fair plant evaluation and quick liquidation for running or idle moulding machinery.</p>
+                </div>
+
+                <div class="border border-slate-100 bg-slate-50 p-4 rounded-xl">
+                  <div class="flex items-center gap-2 font-bold text-slate-800 text-sm mb-1">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-amber-600"></i> Overhauling & Servicing
+                  </div>
+                  <p class="text-xs text-slate-600">Toggle alignment, tie-bar inspection, hydraulic pump rebuilding, and seal replacements.</p>
+                </div>
+
+                <div class="border border-slate-100 bg-slate-50 p-4 rounded-xl">
+                  <div class="flex items-center gap-2 font-bold text-slate-800 text-sm mb-1">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-purple-600"></i> Controller Retrofitting
+                  </div>
+                  <p class="text-xs text-slate-600">Upgrade obsolete controllers with modern PLC/HMI panels with temperature control.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5-Point Quality Check -->
+            <div class="bg-slate-900 text-white rounded-2xl p-6">
+              <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <i data-lucide="shield" class="w-5 h-5 text-brand-accent"></i> JIS Used Machinery Inspection Checklist
+              </h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Clamping Unit & Platen Parallelism</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Screw & Barrel Wear Inspection</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Hydraulic Pressure & Valve Testing</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Heater Band & Thermocouple Verification</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Safety Gate Interlocks & E-Stop Testing</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Dry Run & Load Testing Cycle</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 3: Action Box -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">Sell or Buy Machine</h3>
+              <p class="text-xs text-slate-600 mb-4">Have an Injection Moulding Machine to sell or looking for a specific tonnage for your factory?</p>
+              
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+                <div class="text-xs font-bold text-amber-900">Direct Machine Desk:</div>
+                <div class="text-sm font-extrabold text-slate-900 mt-1">+91-7891101658</div>
+                <div class="text-sm font-extrabold text-slate-900">+91-9024727828</div>
+                <div class="text-[11px] text-amber-800 mt-1">Available on Call & WhatsApp</div>
+              </div>
+            </div>
+
+            <div class="space-y-3">
+              <button onclick="openRfqModal('Purchase / Buy Inquiry for Injection Moulding Machine')" class="w-full bg-brand-navy hover:bg-brand-blue text-white py-3 rounded-lg text-xs font-bold transition-colors">
+                I Want To Buy A Machine
+              </button>
+              <button onclick="openRfqModal('Selling Used Injection Moulding Machine')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 py-3 rounded-lg text-xs font-bold transition-colors">
+                I Want To Sell A Machine
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 5: CONTACT & GST VERIFICATION -->
+    <div id="page-contact" class="page-section">
+      <div class="bg-brand-navy text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-extrabold">Contact & Verification Details</h1>
+          <p class="text-slate-300 mt-2 text-sm sm:text-base">Official plant coordinates, GST registration certificate, and direct support lines.</p>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- Contact Info Cards -->
+          <div class="space-y-6">
+            
+            <!-- GST Card -->
+            <div class="bg-white border-2 border-brand-blue/20 rounded-2xl p-6 shadow-sm">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-extrabold uppercase tracking-wider text-slate-400">Official GST Registration</span>
+                <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">Active</span>
+              </div>
+              <div class="text-xl sm:text-2xl font-mono font-black text-brand-navy tracking-wider select-all" id="gstNumberDisplay">
+                08CBWPG8529P1ZA
+              </div>
+              <p class="text-xs text-slate-500 mt-1">Jyoti Industrial Solution • State: Rajasthan (08)</p>
+              <button onclick="copyGst()" class="mt-4 w-full border border-slate-300 hover:border-brand-blue text-slate-700 hover:text-brand-blue text-xs font-bold py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5" id="copyGstBtn">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy GSTIN
+              </button>
+            </div>
+
+            <!-- Phone Card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-brand-blue">
+                  <i data-lucide="phone" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-900 text-sm">Direct Phone Lines</h3>
+                  <p class="text-xs text-slate-500">Mon - Sat: 9:00 AM - 7:30 PM</p>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <a href="tel:+917891101658" class="flex items-center justify-between p-3 rounded-lg bg-slate-50 hover:bg-slate-100 font-bold text-brand-navy text-sm">
+                  <span>+91-7891101658</span>
+                  <i data-lucide="phone-call" class="w-4 h-4 text-emerald-600"></i>
+                </a>
+                <a href="tel:+919024727828" class="flex items-center justify-between p-3 rounded-lg bg-slate-50 hover:bg-slate-100 font-bold text-brand-navy text-sm">
+                  <span>+91-9024727828</span>
+                  <i data-lucide="phone-call" class="w-4 h-4 text-emerald-600"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Email Card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700">
+                  <i data-lucide="mail" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-900 text-sm">Official Email</h3>
+                  <p class="text-xs text-slate-500">For quotations and drawings</p>
+                </div>
+              </div>
+              <a href="mailto:jyotiindustrialsolution@gmail.com" class="block p-3 rounded-lg bg-slate-50 hover:bg-slate-100 font-semibold text-slate-800 text-xs sm:text-sm break-all">
+                jyotiindustrialsolution@gmail.com
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Contact Form & Address (2 Cols) -->
+          <div class="lg:col-span-2 space-y-6">
+            
+            <!-- Address Card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+              <h3 class="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                <i data-lucide="map-pin" class="w-4 h-4 text-rose-600"></i> Factory / Works Address
+              </h3>
+              <p class="text-slate-700 text-sm leading-relaxed">
+                <strong>Plot No. J-751</strong>, Riico Indl. Area, Phase-II, Bhiwadi, District Khairthal-Tijara, Rajasthan — <strong>301019</strong>
+              </p>
+              <div class="mt-4 pt-4 border-t border-slate-100 flex flex-wrap gap-3">
+                <a href="https://maps.google.com/?q=Plot+No.+J-751,+Riico+Indl.+Area,+Phase-II,+Bhiwadi" target="_blank" class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2 rounded-lg transition-colors">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Open in Google Maps
+                </a>
+                <button onclick="copyAddress()" class="inline-flex items-center gap-2 border border-slate-300 text-slate-700 text-xs font-bold px-4 py-2 rounded-lg hover:border-slate-400 transition-colors" id="copyAddrBtn">
+                  <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Address
+                </button>
+              </div>
+            </div>
+
+            <!-- Direct RFQ Message Box -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+              <h3 class="text-lg font-bold text-slate-900 mb-1">Send Technical Specification / Inquiry</h3>
+              <p class="text-xs text-slate-500 mb-6">Fill in details to instantly prepare a formatted WhatsApp or email inquiry.</p>
+
+              <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Company / Your Name *</label>
+                    <input type="text" id="cName" required placeholder="e.g. Precision Auto Components" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Mobile / WhatsApp Number *</label>
+                    <input type="tel" id="cPhone" required placeholder="e.g. 9876543210" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Requirement Domain</label>
+                    <select id="cDomain" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none bg-white">
+                      <option value="Jigs & Fixtures">Jigs, Fixture & Poka Yoke</option>
+                      <option value="Electrical & Automation">Safety Sensor / PLC / HMI / Servo</option>
+                      <option value="Pneumatics & Hydraulics">Pneumatics & Hydraulics Equipments</option>
+                      <option value="Heater & Thermocouple">Heater & Thermocouple</option>
+                      <option value="Injection Moulding Machine">Injection Moulding Machine (Sale/Purchase/Service)</option>
+                      <option value="SPM / Conveyor">S.P.M. Testing Equipments / Conveyor</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Target Location</label>
+                    <input type="text" id="cLocation" placeholder="e.g. Bhiwadi / Manesar / Neemrana" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Technical Details / Quantities</label>
+                  <textarea id="cMessage" rows="4" placeholder="Mention size, part numbers, sensor models, or machinery tonnage..." class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none"></textarea>
+                </div>
+
+                <div class="flex flex-wrap gap-3 pt-2">
+                  <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg text-sm transition-all flex items-center justify-center gap-2 shadow-sm">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i> Send via WhatsApp Directly
+                  </button>
+                  <button type="button" onclick="sendViaMail()" class="border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold py-3 px-4 rounded-lg text-sm transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Send Email
+                  </button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= UNIVERSAL RFQ MODAL ================= -->
+  <div id="rfqModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+      <button onclick="closeRfqModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-brand-navy text-brand-accent flex items-center justify-center font-bold">
+          JIS
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-brand-navy">Request Official Quotation</h3>
+          <p class="text-xs text-slate-500">Quick estimate directly from our Bhiwadi engineering team</p>
+        </div>
+      </div>
+
+      <form onsubmit="handleModalSubmit(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Item / Service Selected</label>
+          <input type="text" id="modalItemName" readonly class="w-full bg-slate-100 border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-brand-navy">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Your Name / Organization *</label>
+          <input type="text" id="modalCustomerName" required placeholder="Enter company or contact person name" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">WhatsApp / Contact Number *</label>
+          <input type="tel" id="modalCustomerPhone" required placeholder="e.g. +91 9876543210" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Requirement Notes (Dimensions, Model, Tonnage)</label>
+          <textarea id="modalNotes" rows="3" placeholder="Provide specs or quantity..." class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-brand-navy hover:bg-brand-blue text-white font-bold py-2.5 rounded-lg text-xs transition-colors flex items-center justify-center gap-2">
+          <i data-lucide="send" class="w-4 h-4 text-brand-accent"></i> Submit & Forward to WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-brand-dark text-slate-400 text-xs border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <div class="md:col-span-2 space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-brand-blue text-brand-accent font-black text-base flex items-center justify-center">JIS</span>
+            <span class="text-white font-black text-lg">Jyoti Industrial Solution</span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed max-w-md">
+            Manufacturers & engineering services specializing in Jigs, Fixtures, Poka Yoke, Automation sensors, PLC/HMI solutions, Pneumatics, Hydraulics, Heaters, and certified Injection Moulding Machinery overhaul.
+          </p>
+          <div class="pt-2 text-[11px] text-slate-300">
+            <span class="font-bold text-white">GSTIN:</span> 08CBWPG8529P1ZA
+          </div>
+        </div>
+
+        <div>
+          <div class="text-white font-bold mb-3 text-sm">Quick Links</div>
+          <ul class="space-y-2">
+            <li><a href="#home" class="hover:text-white transition-colors">Home Portal</a></li>
+            <li><a href="#about" class="hover:text-white transition-colors">About Facility</a></li>
+            <li><a href="#products" class="hover:text-white transition-colors">Products Catalog</a></li>
+            <li><a href="#machinery" class="hover:text-white transition-colors">Moulding Machines</a></li>
+            <li><a href="#contact" class="hover:text-white transition-colors">Contact & GSTIN</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-white font-bold mb-3 text-sm">Works Location</div>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            Plot No. J-751, Riico Indl. Area, Phase-II, Bhiwadi, Khairthal-Tijara (Raj.) 301019
+          </p>
+          <div class="mt-3 space-y-1">
+            <div><a href="tel:+917891101658" class="text-slate-300 hover:text-white">+91-7891101658</a></div>
+            <div><a href="tel:+919024727828" class="text-slate-300 hover:text-white">+91-9024727828</a></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px]">
+        <div>
+          © 2026 Jyoti Industrial Solution (JIS). All Rights Reserved.
+        </div>
+        <div>
+          Riico Phase-II, Bhiwadi, Rajasthan
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MOBILE STICKY BOTTOM QUICK BAR ================= -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 py-2 px-4 flex items-center justify-around shadow-lg">
+    <a href="tel:+917891101658" class="flex flex-col items-center gap-0.5 text-slate-700 hover:text-brand-blue">
+      <i data-lucide="phone" class="w-4 h-4"></i>
+      <span class="text-[10px] font-semibold">Call</span>
+    </a>
+    <a href="https://wa.me/917891101658?text=Hello%20Jyoti%20Industrial%20Solution,%20I%20have%20an%20inquiry" target="_blank" class="flex flex-col items-center gap-0.5 text-emerald-600 font-semibold">
+      <i data-lucide="message-circle" class="w-4 h-4"></i>
+      <span class="text-[10px]">WhatsApp</span>
+    </a>
+    <a href="#products" class="flex flex-col items-center gap-0.5 text-slate-700 hover:text-brand-blue">
+      <i data-lucide="package" class="w-4 h-4"></i>
+      <span class="text-[10px] font-semibold">Products</span>
+    </a>
+    <a href="#contact" class="flex flex-col items-center gap-0.5 text-slate-700 hover:text-brand-blue">
+      <i data-lucide="map-pin" class="w-4 h-4"></i>
+      <span class="text-[10px] font-semibold">Contact</span>
+    </a>
+  </div>
+
+  <!-- ================= ROUTING & INTERACTIVE JAVASCRIPT ================= -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Multi-Page Hash Router
+    const validPages = ['home', 'about', 'products', 'machinery', 'contact'];
+
+    function routeToPage() {
+      let hash = window.location.hash.replace('#', '') || 'home';
+      if (!validPages.includes(hash)) {
+        hash = 'home';
+      }
+
+      // Hide all page sections
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+
+      // Show target page
+      const targetSec = document.getElementById(`page-${hash}`);
+      if (targetSec) {
+        targetSec.classList.add('active');
+      }
+
+      // Update Navigation Active States
+      document.querySelectorAll('.nav-item').forEach(item => {
+        if (item.getAttribute('data-nav') === hash) {
+          item.classList.add('bg-slate-100', 'text-brand-blue', 'font-bold');
+          item.classList.remove('text-slate-600');
+        } else {
+          item.classList.remove('bg-slate-100', 'text-brand-blue', 'font-bold');
+          item.classList.add('text-slate-600');
+        }
+      });
+
+      // Update Breadcrumbs
+      const breadcrumb = document.getElementById('currentBreadcrumb');
+      if (breadcrumb) {
+        breadcrumb.textContent = hash === 'machinery' ? 'Injection Moulding Machines' : hash.replace('-', ' ');
+      }
+
+      // Scroll to top
+      window.scrollTo(0, 0);
+      
+      // Refresh icons if needed
+      lucide.createIcons();
+    }
+
+    window.addEventListener('hashchange', routeToPage);
+    window.addEventListener('DOMContentLoaded', routeToPage);
+
+    // Mobile Drawer Toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileDrawer.classList.toggle('hidden');
+    });
+
+    function closeDrawer() {
+      mobileDrawer.classList.add('hidden');
+    }
+
+    document.querySelectorAll('.mobile-nav-item').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+
+    // Catalog Filter
+    function filterCatalog(category) {
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-navy', 'text-white');
+        btn.classList.add('bg-slate-200', 'text-slate-700');
+      });
+      event.target.classList.add('bg-brand-navy', 'text-white');
+      event.target.classList.remove('bg-slate-200', 'text-slate-700');
+
+      const cards = document.querySelectorAll('.catalog-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.classList.contains(category)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Modal Control
+    function openRfqModal(itemName) {
+      document.getElementById('modalItemName').value = itemName || 'General Industrial Solution';
+      document.getElementById('rfqModal').classList.remove('hidden');
+      document.getElementById('rfqModal').classList.add('flex');
+    }
+
+    function closeRfqModal() {
+      document.getElementById('rfqModal').classList.add('hidden');
+      document.getElementById('rfqModal').classList.remove('flex');
+    }
+
+    // Modal Form Submission to WhatsApp
+    function handleModalSubmit(e) {
+      e.preventDefault();
+      const item = document.getElementById('modalItemName').value;
+      const name = document.getElementById('modalCustomerName').value;
+      const phone = document.getElementById('modalCustomerPhone').value;
+      const notes = document.getElementById('modalNotes').value;
+
+      const message = `*Jyoti Industrial Solution - RFQ Request*%0A%0A*Item:* ${item}%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Notes:* ${notes || 'N/A'}`;
+      
+      closeRfqModal();
+      window.open(`https://wa.me/917891101658?text=${message}`, '_blank');
+    }
+
+    // Contact Form Direct Submission
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('cName').value;
+      const phone = document.getElementById('cPhone').value;
+      const domain = document.getElementById('cDomain').value;
+      const loc = document.getElementById('cLocation').value;
+      const msg = document.getElementById('cMessage').value;
+
+      const fullMessage = `*New Inquiry for Jyoti Industrial Solution*%0A%0A*Company / Client:* ${name}%0A*Contact:* ${phone}%0A*Domain:* ${domain}%0A*Plant Location:* ${loc || 'Not Specified'}%0A*Requirement:* ${msg || 'Direct Inquiry'}`;
+      window.open(`https://wa.me/917891101658?text=${fullMessage}`, '_blank');
+    }
+
+    function sendViaMail() {
+      const name = document.getElementById('cName').value;
+      const domain = document.getElementById('cDomain').value;
+      const msg = document.getElementById('cMessage').value;
+      const subject = encodeURIComponent(`Quotation Request: ${domain} - ${name}`);
+      const body = encodeURIComponent(`Client Name: ${name}\nRequirement Domain: ${domain}\n\nDetails:\n${msg}`);
+      window.location.href = `mailto:jyotiindustrialsolution@gmail.com?subject=${subject}&body=${body}`;
+    }
+
+    // Copy GSTIN Function
+    function copyGst() {
+      const gst = "08CBWPG8529P1ZA";
+      navigator.clipboard.writeText(gst).then(() => {
+        const btn = document.getElementById('copyGstBtn');
+        btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> GSTIN Copied!`;
+        lucide.createIcons();
+        setTimeout(() => {
+          btn.innerHTML = `<i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy GSTIN`;
+          lucide.createIcons();
+        }, 2000);
+      });
+    }
+
+    // Copy Address Function
+    function copyAddress() {
+      const addr = "Plot No. J-751, Riico Indl. Area, Phase-II, Bhiwadi, Khairthal-Tijara (Raj.) 301019";
+      navigator.clipboard.writeText(addr).then(() => {
+        const btn = document.getElementById('copyAddrBtn');
+        btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> Address Copied!`;
+        lucide.createIcons();
+        setTimeout(() => {
+          btn.innerHTML = `<i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Address`;
+          lucide.createIcons();
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
